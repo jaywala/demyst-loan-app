@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>Pre Approval</h1>
+
+Congratulations, your loan application has been submitted successfully!
+<br/>
+Your pre-assessment is <b>{{pre_assessment}}%</b> of your requested loan <b>AUD {{loan_application.loan_amount}}</b>.
+<br/>
+You'll be contacted regarding the final approval confirmation once the loan has been assessed
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+<h1>Balance Sheet</h1>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+Balance Sheet for buisness: {{buisness_name}}
+
+<table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Profit</th>
+        <th>Asset value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for balance_sheet in balance_sheets %}
+        <tr>
+          <td>{{ balance_sheet['month'] }}</td>
+          <td>{{ balance_sheet['year'] }}</td>
+          <td>{{ balance_sheet['profit'] }}</td>
+          <td>{{ balance_sheet['asset_value'] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+<br/>
+
+<div>
+  <form method="POST">
+      <div>
+      <button name="submit" type="submit">Submit</button>
+      <button formnovalidate name="cancel" type="submit">Cancel</button>
+  </form>
+</div>
+
+{% endblock %}
