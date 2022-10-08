@@ -1,5 +1,4 @@
 import os
-
 from flask import Flask, render_template, request, redirect, url_for, abort
 from flask import Flask, session
 from flask_session import Session
@@ -45,20 +44,7 @@ def create_app(test_config=None):
     def get():
         return session.get('key', 'not set')
 
-    # if test_config is None:
-    #     # load the instance config, if it exists, when not testing
-    #     app.config.from_pyfile('config.py', silent=True)
-    # else:
-    #     # load the test config if passed in
-    #     app.config.from_mapping(test_config)
 
-    # ensure the instance folder exists
-    # try:
-    #     os.makedirs(app.instance_path)
-    # except OSError:
-    #     pass
-
-    # a simple page that says hello
     @app.route('/',methods = ['GET', 'POST'])
     def home():
         # if request.method == 'POST':
@@ -80,7 +66,8 @@ def create_app(test_config=None):
                 session['established_year'] = request.form.get("established_year")
                 return redirect(url_for('balance_sheet'))
         return render_template('loan_application.html')
-        
+
+
     @app.route('/balance_sheet', methods = ['GET', 'POST'])
     def balance_sheet():
         # balance_sheets_test = [{"month": "1/2020","profit": "100","asset_value": "-100"}, {"month": "2/2020","profit": "100","asset_value": "-100"}, {"month": "3/2020","profit": "100","asset_value": "-100"}]
@@ -115,5 +102,6 @@ def create_app(test_config=None):
     @app.route('/<path:path>')
     def catch_all(path):
         return '404 page not found'
+
 
     return app
