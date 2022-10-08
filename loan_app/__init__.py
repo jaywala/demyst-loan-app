@@ -28,7 +28,6 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev'
-        # DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
     app.config["SESSION_PERMANENT"] = False
@@ -78,6 +77,8 @@ def create_app(test_config=None):
         if request.method == 'POST':
             if 'submit' in request.form:
                 return redirect(url_for('pre_assessment'))
+            elif 'cancel' in request.form:
+                return redirect(url_for('home'))
         
         app.logger.info(f"{session['buisness_name']}, {session['loan_amount']}, {session['asp']}, {session['established_year']}")
         loan_application = LoanApplication(session['buisness_name'], session['loan_amount'], session['asp'], session['established_year'])
@@ -91,11 +92,11 @@ def create_app(test_config=None):
         loan_application = LoanApplication(session['buisness_name'], session['loan_amount'], session['asp'], session['established_year'])
         pre_assessment = loan_application.calculatePreAssessment()
         loan_summary = LoanSummary(loan_application.buisness_name, loan_application.established_year, loan_application.calculateYearlyProfits(), loan_application.loan_amount, pre_assessment)
-        # Mocking decision engine request was successful
+        # Mocking decision engine request was successful. Contact support message if the request fails (once integrated)
         if loan_summary.sendSummaryToDecisionEngine() == True:
             return render_template('pre_assessment.html', pre_assessment = pre_assessment, loan_application = loan_application)
         else:
-            return 'Submission failed! Please contact an admin'
+            return 'Application submission failed! Please contact Support team'
 
 
     @app.route('/', defaults={'path': ''})
