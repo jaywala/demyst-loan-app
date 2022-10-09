@@ -59,7 +59,8 @@ python3 -m pytest loan_app/tests/
 * The frontend is rendered using templating. This requires server side processing as the html is rendered on server side
 
 * This is an MVP, to productionise this app a few key things are required:
-  * Recommended switch app to https to employ encryption in transit
-  * Built using templating as only a basic frontend was required. A frontend framework should be considered especially if scaling to large number of users
-    * Caveats of server side rendering is requires more processing on the server and as a result the server will not scale as well to larger number of users. However advantages are the website is more inclusive as it doesn't rely as much on the client's device and it's processing power to be responsive
+  * Recommended to switch app to "https" protocol to encrypt data in transit
+  * Switch to using a DBMS. Currently the user data is stored using flask-sessions in filesystem for simplicity
+  * Built using templating as only a basic frontend was required and I'm not as familiar with frontend frameworks. A frontend framework as well as client side rendering should be considered especially if scaling to a large number of users
+    * Caveats of server side rendering is that it requires more processing on the server and as a result the server will not scale as well to larger number of users. However advantages are the website is more inclusive as it doesn't rely as much on the client's device and it's processing power to be responsive
   * Deploy to a cloud/dedicated server
