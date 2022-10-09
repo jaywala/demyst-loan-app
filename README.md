@@ -63,4 +63,5 @@ python3 -m pytest loan_app/tests/
   * Switch to using a DBMS. Currently the user data is stored using flask-sessions in filesystem for simplicity
   * Built using templating as only a basic frontend was required and I'm not as familiar with frontend frameworks. A frontend framework as well as client side rendering should be considered especially if scaling to a large number of users
     * Caveats of server side rendering is that it requires more processing on the server and as a result the server will not scale as well to larger number of users. However advantages are the website is more inclusive as it doesn't rely as much on the client's device and it's processing power to be responsive
+  * Consider improving the frontend with styling and ensuring it works across differnet devices well
   * Deploy to a cloud/dedicated server
